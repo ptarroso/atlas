@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.9.0/css/ol.css" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="main.css" />
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.9.0/build/ol.js"></script>
+    <title></title>
+</head>
+
+<body>
+    <div class="columns">
+        <div class="column">
+            <section class="hero is-info">
+                <div class="hero-body">
+                    <p id="title" class="title"></p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div id="maincontent" class="columns is-vcentered is-centered">
+        <div class="column">
+        </div>
+        <div class="column is-two-fifths ">
+            <article class="message is-primary">
+                <div class="message-header">
+                    <p>Select mapping options</p>
+                </div>
+                <div class="message-body">
+                    <label class="label">Map type</label>
+                    <div class="buttons is-left">
+                        <button id="distributions" class="button is-info is-outlined">Distributions</button>
+                        <button id="richness" class="button is-info is-outlined">Richness</button>
+                    </div>
+                    <div class="block">
+                        <label class="label">Class selection</label>
+                        <div class="select">
+                            <select id="class" style="width:200px" disabled></select>
+                        </div>
+                    </div>
+                    <div class="block">
+                        <label class="label">Species selection</label>
+                        <div class="select">
+                            <select id="species" style="width:350px" disabled></select>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article class="message is-info">
+                <div class="message-header">
+                    <p>Additional info</p>
+                </div>
+                <div id="infomessage" class="message-body">
+                </div>
+            </article>
+        </div>
+        <div class="column">
+            <div id="map" class="map"></div>
+            <div id="popup" class="ol-popup message">
+                <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                <div id="popup-content"></div>
+            </div>
+            <div id="legend">
+                <canvas id="legendcanvas" width=500 height=50>
+                </canvas>
+            </div>
+        </div>
+        <div class="column">
+        </div>
+    </div>
+    <footer class="footer">
+        <div id="footer" class="content has-text-centered is-small">
+        </div>
+    </footer>
+    
+    <div id="overlayNote" class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">modal_title</p>
+        </header>
+        <section class="modal-card-body">
+          <!-- Content ... -->
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success">Close</button>
+        </footer>
+      </div>
+    </div>    
+    
+    <script src="main.js"></script>
+</body>
+
+</html>

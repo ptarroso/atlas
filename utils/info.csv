@@ -1,0 +1,3 @@
+class,info
+Class1,Additional info can be passed for each class in a csv file. HTML is allowed and links to pages <a href="http://www.github.com"> can be addded</a> as typical links. If much text is available, the link to a local html can be given with the class "overlayNode" as <xmp><a href=localHtml class="overlaynote"></xmp>. The <a href="./extra_info.html" class="overlaynote">local html file</a> opens in an overlay window with the additional information text.
+Class2, Additional info for Class2.
