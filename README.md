@@ -51,15 +51,15 @@ Some additional information can be associated with each class to be shown in a d
 
 Note that the additional info supports html notation. Font effects (bold, italics, etc) can be used with the respective html tags but you can also use links and other features. Links may follow the typical tag code:
 
-'''
+```
 <a href="./extra_info.html"> 
-'''
+```
 
 and open in a new window. If a class "overlaynote" is specified, than it opens the local html in a overlay window, without leaving the webpage.
 
-'''
+```
 <a href="./extra_info.html" class="overlaynote">
-'''
+```
 
 See the example *info.csv* in the *utils* folder for more details.
 
