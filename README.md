@@ -4,9 +4,7 @@ This repository is a template to produce a webpage with a Biodiversity Distribut
 
 The user can produce the grid that best suits the data that will be used for the distribution Atlas. Species are grouped by classes and the distribution is shown using the grid cells where the species was observed. The code provided here produces richness maps per class and per grid cell with observation data.
 
-[MAYBE SOME Screenshot?]
-
-A version with example data is available.
+[A version with example data is available.](https://ptarroso.github.io/atlas/)
 
 # Configuration
 
