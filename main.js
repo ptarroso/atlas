@@ -341,14 +341,15 @@ var showOverlayNote = function(title, body) {
     var ovlNote = document.getElementById("overlayNote");
     var ovlTitle = ovlNote.getElementsByClassName("modal-card-title")[0];
     var ovlBody = ovlNote.getElementsByClassName("modal-card-body")[0];
+    var ovlContent = ovlBody.getElementsByClassName("content")[0];
     var closeBut = ovlNote.getElementsByClassName("button")[0];
     ovlTitle.textContent = title;
-    ovlBody.innerHTML = body;
-    ovlBody.scrollTop = 0;
+    ovlContent.innerHTML = body;
     closeBut.addEventListener('click', function() {
         ovlNote.setAttribute("class", "modal");
     })
     ovlNote.setAttribute("class", "modal is-active");    
+    ovlBody.scrollTop = 0;
 };
 
 var getHtmlContent = function(href) {
