@@ -24,6 +24,7 @@ const obsDefinitions = {"fill": "#3e8ed0aa", "stroke": "#ffffff75", "width": 3};
 
 // Definitions for styles of extra points (circle symbols only). "name" is the
 // value associated with species observations (no more than 3 levels)
+// The order of the symbols is used for plotting.
 extraDefinitions = {
     "Class1": [{
             "name": 2,
@@ -33,15 +34,15 @@ extraDefinitions = {
         },
         {
             "name": 3,
-            "radius": 2,
-            "fill": "#300505",
-            "text": "Last label by radius order"
-        },
-        {
-            "name": 4,
             "radius": 4,
             "fill": "#9e2a2b",
             "text": "Another label"
+        }, 
+        {
+            "name": 4,
+            "radius": 2,
+            "fill": "#300505",
+            "text": "Last label by radius order"
         }
     ]
 };
@@ -160,11 +161,12 @@ var extraDistribStyles = function(feature, resolution) {
         var coordinates = getCentroid(feature.getGeometry().getCoordinates()[0]);
         var id = feature.get('grdref');
         var values = spQuads.value(id);
-        for (let i = 0; i < values.length; i++) {
-            var def = extraDefinitions[cl].filter(e => e.name == values[i])
-            if (def.length > 0) {
-                var radius = 5000 / resolution * def[0].radius
-                var fill = def[0].fill
+        // Loop over extraDefinitions to ensure plotting order
+        for (let i = 0; i < extraDefinitions[cl].length; i++) {
+            var def = extraDefinitions[cl][i]
+            if (values.includes(def.name)) {
+                var radius = 5000 / resolution * def.radius
+                var fill = def.fill
                 styles.push(new ol.style.Style({
                     image: new ol.style.Circle({
                         radius: radius,
@@ -307,26 +309,29 @@ var extraLegend = function(values) {
     if (Object.keys(extraDefinitions).includes(cl) && spQuads.hasMultipleValues()) {
         var cv = document.getElementById("legendcanvas");
         var ctx = cv.getContext('2d');
-        for (let i = 0; i < values.length; i++) {
-            var def = extraDefinitions[cl].filter(e => e.name == values[i])
-            let r = def[0].radius * 2
-            ctx.beginPath();
-            ctx.arc(150, 23, r, 0, 2 * Math.PI, false);
-            ctx.fillStyle = def[0].fill;
-            ctx.fill();
-            ctx.lineWidth = 0;
-            ctx.strokeStyle = def[0].fill;
-            ctx.stroke();
-            ctx.fillStyle = "black";
-            ctx.fillText(def[0].text, 185, i * 15 + 14);
-            ctx.beginPath();
-            ctx.lineWidth = 1;
-            let a = (i / (values.length - 1) - 0.5) / 2 * Math.PI;
-            ctx.moveTo(150 + Math.cos(a) * r * 0.8, 23 + Math.sin(a) * r);
-            ctx.lineTo(175, i * 15 + 10);
-            ctx.lineTo(184, i * 15 + 10);
-            ctx.strokeStyle = "black";
-            ctx.stroke();
+        // Loop over extraDefinitions to ensure plotting order 
+        for (let i = 0; i < extraDefinitions[cl].length; i++) {
+            var def = extraDefinitions[cl][i]
+            if (values.includes(def.name)) {
+                let r = def.radius * 2
+                ctx.beginPath();
+                ctx.arc(150, 23, r, 0, 2 * Math.PI, false);
+                ctx.fillStyle = def.fill;
+                ctx.fill();
+                ctx.lineWidth = 0;
+                ctx.strokeStyle = def.fill;
+                ctx.stroke();
+                ctx.fillStyle = "black";
+                ctx.fillText(def.text, 185, i * 15 + 14);
+                ctx.beginPath();
+                ctx.lineWidth = 1;
+                let a = (i / (values.length - 1) - 0.5) / 2 * Math.PI;
+                ctx.moveTo(150 + Math.cos(a) * r * 0.8, 23 + Math.sin(a) * r);
+                ctx.lineTo(175, i * 15 + 10);
+                ctx.lineTo(184, i * 15 + 10);
+                ctx.strokeStyle = "black";
+                ctx.stroke();
+            }
         };
     };
 };
